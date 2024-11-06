@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:responsi_mobile_lanjut/components/wg_profile.dart';
+import 'package:responsi_mobile_lanjut/ui/kelola_akun.dart';
 
 class AkunView extends StatelessWidget {
   const AkunView({super.key});
@@ -26,9 +28,7 @@ class AkunView extends StatelessWidget {
                   height: 50,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    //
-                  },
+                  onTap: () => Get.to(const EditAkun()),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

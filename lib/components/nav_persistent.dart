@@ -63,22 +63,22 @@ class NavPersistent extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.home),
         title: 'Home',
-        activeColorPrimary: CupertinoColors.activeBlue,
-        activeColorSecondary: CupertinoColors.white,
+        activeColorPrimary: CupertinoColors.systemBlue,
+        activeColorSecondary: CupertinoColors.black,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.account_circle),
         title: 'Account',
-        activeColorPrimary: CupertinoColors.activeBlue,
-        activeColorSecondary: CupertinoColors.white,
+        activeColorPrimary: CupertinoColors.systemBlue,
+        activeColorSecondary: CupertinoColors.black,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.logout),
         title: 'Logout',
-        activeColorPrimary: CupertinoColors.activeBlue,
-        activeColorSecondary: CupertinoColors.white,
+        activeColorPrimary: CupertinoColors.systemBlue,
+        activeColorSecondary: CupertinoColors.black,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
     ];

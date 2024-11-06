@@ -16,16 +16,16 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController  = TextEditingController();
   String? _errorMsg;
   final String email = 'admin@gmail.com';
   final String password = 'password';
 
   void _login() {
     if (_formKey.currentState!.validate()) {
-      if (emailController.text == email &&
-          passwordController.text == password) {
+      if (_emailController.text == email &&
+          _passwordController.text == password) {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const NavPersistent()));
       } else {
@@ -35,8 +35,6 @@ class _LoginViewState extends State<LoginView> {
       }
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +67,7 @@ class _LoginViewState extends State<LoginView> {
                   child: Column(
                     children: [
                       LabelTextfield(
-                        controller: emailController,
+                        controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         expands: false,
                         textAlign: TextAlign.start,
@@ -77,29 +75,30 @@ class _LoginViewState extends State<LoginView> {
                         fieldFill: Colors.white,
                         hintText: "Email",
                         isRequired: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Email wajib diisi!!";
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Email tidak boleh kosong';
+                            }
+                            // Validasi pola email
+                            if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                              return 'Masukkan email yang valid';
+                            }
+                            return null;
                           }
-                          return null;
-                        },
                       ),
                       const SizedBox(height: 20),
                       LabelTextfield(
-                        controller: passwordController,
+                        controller: _passwordController ,
                         keyboardType: TextInputType.visiblePassword,
+                        obscureText: true,
                         expands: false,
                         textAlign: TextAlign.start,
                         label: "Masukkan Password",
                         fieldFill: Colors.white,
                         hintText: "Password",
                         isRequired: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Password wajib diisi!!";
-                          }
-                          return null;
-                        },
+                        validator: (value) =>
+                          value!.isEmpty ? 'Password tidak boleh kosong' : null,
                       ),
                       const SizedBox(height: 10),
                       Row(
@@ -144,9 +143,7 @@ class _LoginViewState extends State<LoginView> {
                       const SizedBox(height: 80),
                       CardButton(
                         btnText: "Masuk",
-                        onTap: () {
-                          Get.to(const NavPersistent());
-                        },
+                        onTap: () => Get.to(const NavPersistent()),
                         textStyle: GoogleFonts.poppins(
                           fontWeight: FontWeight.w600,
                           fontSize: 24,

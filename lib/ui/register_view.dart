@@ -133,7 +133,7 @@ class _RegistrasiViewState extends State<RegistrasiView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Belum punya akun?",
+                          "Sudah punya akun?",
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w400,
                             fontSize: 13,
