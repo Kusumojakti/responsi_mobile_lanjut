@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsi_mobile_lanjut/components/card_button.dart';
-import 'package:responsi_mobile_lanjut/components/label_textfield.dart';
 import 'package:responsi_mobile_lanjut/components/nav_persistent.dart';
 import 'package:responsi_mobile_lanjut/ui/forgot_password.dart';
 import 'package:responsi_mobile_lanjut/ui/register_view.dart';
@@ -17,7 +16,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController  = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   String? _errorMsg;
   final String email = 'admin@gmail.com';
   final String password = 'password';
@@ -66,39 +65,69 @@ class _LoginViewState extends State<LoginView> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      LabelTextfield(
+                      TextFormField(
                         controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        expands: false,
-                        textAlign: TextAlign.start,
-                        label: "Masukkan Email",
-                        fieldFill: Colors.white,
-                        hintText: "Email",
-                        isRequired: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Email tidak boleh kosong';
-                            }
-                            // Validasi pola email
-                            if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                              return 'Masukkan email yang valid';
-                            }
-                            return null;
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Email tidak boleh kosong';
                           }
+                          // Validasi pola email
+                          if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                            return 'Masukkan email yang valid';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 20),
-                      LabelTextfield(
-                        controller: _passwordController ,
-                        keyboardType: TextInputType.visiblePassword,
+                      TextFormField(
+                        controller: _passwordController,
                         obscureText: true,
-                        expands: false,
-                        textAlign: TextAlign.start,
-                        label: "Masukkan Password",
-                        fieldFill: Colors.white,
-                        hintText: "Password",
-                        isRequired: true,
-                        validator: (value) =>
-                          value!.isEmpty ? 'Password tidak boleh kosong' : null,
+                        decoration: const InputDecoration(
+                          hintText: 'Masukan Password Anda',
+                          labelText: 'Password',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Password tidak boleh kosong';
+                          }
+                          if (value.length < 8) {
+                            return 'Password harus minimal 8 karakter';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 10),
                       Row(
@@ -143,7 +172,7 @@ class _LoginViewState extends State<LoginView> {
                       const SizedBox(height: 80),
                       CardButton(
                         btnText: "Masuk",
-                        onTap: () => Get.to(const NavPersistent()),
+                        onTap: () => _login(),
                         textStyle: GoogleFonts.poppins(
                           fontWeight: FontWeight.w600,
                           fontSize: 24,
